@@ -1,0 +1,24 @@
+### Eureka Server 应用名称
+spring:
+  application:
+    name: zcd-eureka-server
+  freemarker:
+    prefer-file-system-access: false
+    template-loader-path: classpath:/templates/
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+### Eureka Server 服务端口
+server:
+  port: 9020
+### 取消服务器自我注册    注册中心的服务器，没有必要再去检索服务
+## Eureka Server 服务 URL,用于客户端注册
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+
+

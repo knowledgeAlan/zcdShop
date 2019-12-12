@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: zcd-manage
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: true
+logging:
+  level:
+    root: info
+    com.bootdo: debug
+## 提供方端口 9090 - 9099
+#server.port = ${random.int[9090,9099]}
+server:
+  port: 9031
+
+
+## Eureka Server 服务 URL,用于客户端注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9020/eureka
+
+
+##feign调用配置文件
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+        loggerLevel: full
+
+
+ribbon:
+  eager-load:
+    clients: zcd-system-service
+  okhttp:
+    enabled: true
+  eureka:
+    enabled: true
+zcd-system-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
